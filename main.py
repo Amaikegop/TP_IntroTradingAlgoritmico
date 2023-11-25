@@ -22,10 +22,11 @@ if __name__ == '__main__':
     data = bt.feeds.YahooFinanceCSVData(
         dataname=datapath,
         # Do not pass values before this date
-        fromdate=datetime.datetime(2000, 1, 1),
+        fromdate=datetime.datetime(1995, 1, 1),
         # Do not pass values after this date
         todate=datetime.datetime(2014, 12, 31),
-        reverse=False)
+        reverse=False,
+        adjclose = False)
 
     # Add the Data Feed to Cerebro
     cerebro.adddata(data)
@@ -46,4 +47,11 @@ if __name__ == '__main__':
     
     for data in cerebro.datas:
         print('Símbolo:', data._name, 'Posición:', cerebro.broker.getposition(data).size)
-    # cerebro.plot(style='candlestick')
+    
+    def plot(self, fig, plotter):
+        # Agregar líneas para visualizar las medias móviles corta y larga
+        plotter.plotline(self.sma_short, color='green', linewidth=2, linestyle='dashed', subplot=True)
+        plotter.plotline(self.sma_long, color='red', linewidth=2, linestyle='dashed', subplot=True)
+        # Marcar las señales de compra y venta con triángulos
+    
+    # cerebro.plot()
