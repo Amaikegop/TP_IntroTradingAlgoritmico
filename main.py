@@ -7,7 +7,7 @@ import sys  # To find out the script name (in argv[0])
 
 # Import the backtrader platform
 import backtrader as bt
-import TestStrategy
+import Strategy
 
 if __name__ == '__main__':
     # Create a cerebro entity
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     data = bt.feeds.YahooFinanceCSVData(
         dataname=datapath,
         # Do not pass values before this date
-        fromdate=datetime.datetime(1995, 1, 1),
+        fromdate=datetime.datetime(1995,1,1),
         # Do not pass values after this date
         todate=datetime.datetime(2014, 12, 31),
         reverse=False,
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     cerebro.broker.setcash(100000.0)
 
     # strategy = TestStrategy()
-    cerebro.addstrategy(TestStrategy.TestStrategy)
+    cerebro.addstrategy(Strategy.BollingerRSIStrategy)
     # Print out the starting conditions
     print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
 
@@ -48,10 +48,5 @@ if __name__ == '__main__':
     for data in cerebro.datas:
         print('Símbolo:', data._name, 'Posición:', cerebro.broker.getposition(data).size)
     
-    def plot(self, fig, plotter):
-        # Agregar líneas para visualizar las medias móviles corta y larga
-        plotter.plotline(self.sma_short, color='green', linewidth=2, linestyle='dashed', subplot=True)
-        plotter.plotline(self.sma_long, color='red', linewidth=2, linestyle='dashed', subplot=True)
-        # Marcar las señales de compra y venta con triángulos
-    
-    # cerebro.plot()
+
+    cerebro.plot(style="candlestick")
