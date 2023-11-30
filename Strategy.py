@@ -44,9 +44,9 @@ class BollingerRSIStrategy(bt.Strategy):
         if len(self) < 4:
             return
         three_white_soldiers = (
-            self.data.close[-1] > self.data.open[-1] and #es alcista
-            self.data.close[-2] > self.data.open[-2] and #es alcista
-            self.data.close[-3] > self.data.open[-3] and #es alcista
+            self.data.close[-1] > self.data.open[-1] and #Alcista
+            self.data.close[-2] > self.data.open[-2] and #Alcista
+            self.data.close[-3] > self.data.open[-3] and #Alcista
             self.data.close[-1] > self.data.close[-2] and #la tercera cierra arriba que la segunda
             self.data.close[-2] > self.data.close[-3] and # la segunda cierra arriba de la primera
             self.data.open[-1] > self.data.open[-2] and # la tercera abre arriba de la segunda

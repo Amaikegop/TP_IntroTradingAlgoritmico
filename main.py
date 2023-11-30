@@ -49,4 +49,4 @@ if __name__ == '__main__':
         print('Símbolo:', data._name, 'Posición:', cerebro.broker.getposition(data).size)
     
 
-    cerebro.plot(style="candlestick")
+    cerebro.plot()
